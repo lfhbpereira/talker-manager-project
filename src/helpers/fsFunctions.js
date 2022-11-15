@@ -9,4 +9,11 @@ const getAllTalkers = async () => {
   return JSON.parse(data);
 };
 
-module.exports = { getAllTalkers };
+const getTalkerById = async (id) => {
+  const talkers = await getAllTalkers();
+  const talkerById = talkers.find((talker) => talker.id === Number(id));
+
+  return talkerById;
+};
+
+module.exports = { getAllTalkers, getTalkerById };
