@@ -9,4 +9,4 @@ const getAllTalkers = async () => {
   return JSON.parse(data);
 };
 
-module.exports = getAllTalkers;
+module.exports = { getAllTalkers };
