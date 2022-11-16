@@ -1,5 +1,11 @@
 const express = require('express');
 const fsFunctions = require('../helpers/fsFunctions');
+const validateToken = require('../middlewares/validateToken');
+const validateName = require('../middlewares/validateName');
+const validateAge = require('../middlewares/validateAge');
+const validateTalk = require('../middlewares/validateTalk');
+const validateWatchedAt = require('../middlewares/validateWatchedAt');
+const validateRate = require('../middlewares/validateRate');
 
 const router = express.Router();
 
@@ -19,5 +25,21 @@ router.get('/:id', async (req, res) => {
 
   res.status(200).json(talkerById);
 });
+
+router.post(
+  '/',
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validateRate,
+  async (req, res) => {
+    const { name, age, talk } = req.body;
+    const newTalker = await fsFunctions.addNewTalker({ name, age, talk });
+
+    res.status(201).json(newTalker);
+  },
+);
 
 module.exports = router;
