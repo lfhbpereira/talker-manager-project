@@ -43,4 +43,13 @@ const updateTalker = async (id, talker) => {
   return talkers[index];
 };
 
-module.exports = { getAllTalkers, getTalkerById, addNewTalker, updateTalker };
+const deleteTalker = async (id) => {
+  const talkers = await getAllTalkers();
+  const newListOfTalkers = talkers.find((talker) => talker.id !== Number(id));
+
+  await fs.writeFile(TALKERS_DATA, JSON.stringify(newListOfTalkers));
+
+  return newListOfTalkers;
+};
+
+module.exports = { getAllTalkers, getTalkerById, addNewTalker, updateTalker, deleteTalker };

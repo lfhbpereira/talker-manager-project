@@ -59,4 +59,12 @@ router.put(
   },
 );
 
+router.delete('/:id', validateToken, async (req, res) => {
+  const { id } = req.params;
+
+  await fsFunctions.deleteTalker(id);
+
+  res.status(204).json();
+});
+
 module.exports = router;
