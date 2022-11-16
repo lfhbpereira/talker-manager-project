@@ -42,4 +42,21 @@ router.post(
   },
 );
 
+router.put(
+  '/:id',
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  validateRate,
+  async (req, res) => {
+    const { id } = req.params;
+    const { name, age, talk } = req.body;
+    const talker = await fsFunctions.updateTalker(Number(id), { name, age, talk });
+
+    res.status(200).json(talker);
+  },
+);
+
 module.exports = router;
