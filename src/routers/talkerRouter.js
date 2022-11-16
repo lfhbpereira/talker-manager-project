@@ -9,6 +9,18 @@ const validateRate = require('../middlewares/validateRate');
 
 const router = express.Router();
 
+router.get('/search', validateToken, async (req, res) => {
+  const { q } = req.query;
+
+  if (!q) {
+    return res.status(200).json(await fsFunctions.getAllTalkers());
+  }
+
+  const talkersByName = await fsFunctions.getTalkersByName(q);
+
+  res.status(200).json(talkersByName);
+});
+
 router.get('/', async (_req, res) => {
   const talkers = await fsFunctions.getAllTalkers();
 

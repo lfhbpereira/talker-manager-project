@@ -16,6 +16,13 @@ const getTalkerById = async (id) => {
   return talkerById;
 };
 
+const getTalkersByName = async (searchTerm) => {
+  const talkers = await getAllTalkers();
+  const talkersByName = talkers.filter((talker) => talker.name.includes(searchTerm));
+
+  return talkersByName;
+};
+
 const addNewTalker = async (talker) => {
   const talkers = await getAllTalkers();
   const newTalker = {
@@ -52,4 +59,11 @@ const deleteTalker = async (id) => {
   return newListOfTalkers;
 };
 
-module.exports = { getAllTalkers, getTalkerById, addNewTalker, updateTalker, deleteTalker };
+module.exports = {
+  getAllTalkers,
+  getTalkerById,
+  addNewTalker,
+  updateTalker,
+  deleteTalker,
+  getTalkersByName,
+};
